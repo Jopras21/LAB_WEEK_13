@@ -1,0 +1,25 @@
+1. Why is MVVM important? Which files represent Model, which files represent View, and which files represent ViewModel?
+Jawaban: MVVM (Model-View-ViewModel) sangat penting karena memisahkan Business Logic (pengolahan data) dari UI Logic (tampilan). Hal ini membuat kode lebih clean, mudah dirawat (maintainable), dan mudah diuji (testable). Jika kita ingin mengganti tampilan UI, kita tidak perlu mengacak-acak logika database atau API.
+
+2. 2. In Part 1, you implemented Data Binding, why is this more efficient than using the normal method?
+   Jawaban: Data Binding lebih efisien karena
+   - Menghilangkan Boilerplate Code: Kita tidak perlu lagi menulis findViewById() berulang kali untuk setiap komponen UI, yang membuat kode Activity menjadi jauh lebih bersih.
+   - Deklaratif di XML: Kita bisa langsung menghubungkan variabel data (seperti Movie) ke atribut UI di XML (contoh: android:text="@{movie.title}"), sehingga UI otomatis ter-update saat data berubah tanpa perlu kode manual di Activity.
+   - Performa & Null Safety: Library Data Binding membuat kode pengikat di waktu kompilasi (compile time), yang lebih cepat daripada mencari ID saat runtime, dan meminimalkan risiko NullPointerException karena salah ID view.
+
+3. 3. In Part 2, you implemented the Singleton Pattern, why is this important?
+   Jawaban: Singleton Pattern pada MovieDatabase sangat krusial karena:
+   - Resource Expensive: Membuat instance database (Room.databaseBuilder) adalah proses yang sangat berat dan memakan memori (mahal). Jika kita membuat instance baru setiap kali mengakses database, aplikasi akan menjadi lambat dan boros memori.
+   - Data Consistency: Singleton memastikan hanya ada satu pintu akses ke database fisik yang sama di seluruh aplikasi. Ini mencegah Race Conditions (kondisi balapan) di mana dua thread berbeda mencoba menulis ke database secara bersamaan yang bisa menyebabkan data korup atau inkonsisten.
+
+4. In Part 2 & 3, you implemented the Repository Pattern, why is this important?
+   Jawaban: Repository Pattern penting karena ia bertindak sebagai Single Source of Truth (satu-satunya sumber kebenaran data) bagi ViewModel.
+   - Abstraksi Sumber Data: ViewModel tidak perlu tahu (dan tidak peduli) apakah data film diambil dari Server (API/Retrofit) atau dari Penyimpanan Lokal (Room Database)
+   - Logika Caching: Repository-lah yang menangani logika cerdas: "Cek dulu data di Room (offline). Jika ada, tampilkan. Jika kosong, baru download dari API lalu simpan ke Room." Tanpa Repository, logika rumit ini akan menumpuk di ViewModel atau Activity, yang menyalahi prinsip Clean Architecture.
+
+5. In part 3, you implemented the Worker Manager, is there another way to refresh your database with the latest data other than using Worker?
+   Jawaban: Ya, ada beberapa cara lain tergantung kebutuhan pemicunya:
+   - SwipeRefreshLayout: Mengizinkan pengguna menarik layar ke bawah (pull-to-refresh) untuk memicu pemanggilan API secara manual saat aplikasi sedang dibuka.
+   - Lifecycle Methods (onStart/onResume): Mengecek dan mengambil data baru setiap kali pengguna membuka kembali aplikasi atau kembali ke halaman tersebut (walaupun ini kurang efisien jika user sering bolak-balik aplikasi).
+   - AlarmManager: Cara lama (sebelum WorkManager) untuk menjadwalkan tugas di waktu tertentu, meskipun sekarang kurang disarankan karena manajemen baterai Android yang ketat.
+   - FCM (Firebase Cloud Messaging): Server mengirim notifikasi "silent push" ke aplikasi untuk memberitahu bahwa ada data baru, lalu aplikasi melakukan fetch di background.
