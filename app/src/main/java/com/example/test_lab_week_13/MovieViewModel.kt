@@ -3,7 +3,7 @@ package com.example.test_lab_week_13
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.test_lab_week_13.model.Movie
+import com.example.lab_week_13.model.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -24,6 +24,10 @@ glide = "5.0.5"
 # Coroutines
 kotlinxCoroutinesCore = "1.10.2"
 
+room = "2.5.2"
+
+ksp = "2.0.21-1.0.27"
+
 
 [libraries]
 # AndroidX
@@ -50,6 +54,10 @@ converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.r
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref="moshi"}
 moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
 # Image Loading
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 
@@ -60,3 +68,4 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

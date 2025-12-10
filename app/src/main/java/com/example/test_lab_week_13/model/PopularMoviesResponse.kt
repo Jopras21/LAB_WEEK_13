@@ -1,5 +1,6 @@
 package com.example.test_lab_week_13.model
 
+import com.example.lab_week_13.model.Movie
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
