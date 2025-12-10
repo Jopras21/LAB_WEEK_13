@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.example.lab_week_13"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -41,6 +41,7 @@ android {
     }
 }
 dependencies {
+    implementation (libs.androidx.work.runtime)
     implementation(libs.androidx.recyclerview)
     implementation(libs.glide)
     implementation(libs.retrofit)
